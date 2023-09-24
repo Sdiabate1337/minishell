@@ -140,7 +140,7 @@ int	main(int argc, char **argv, char **env)
 	/*
         	if (!minishell.line)
 			(ft_clean_ms(),
-				ft_putstr_fd("exit\n", 1), exit(minishell.exit_s));
+				ft_putstr_fd("exit\n", 1), exit(minishell.exit_status));
 		if (minishell.line[0])
 			add_history(minishell.line);
     */
@@ -157,9 +157,9 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
         */
-		//ft_start_execution();
+		ft_start_execution();
 	}
 	ft_garbage_collector(NULL, true);
     return (0);
-	//return (ft_clean_ms(), minishell.exit_s);
+	//return (ft_clean_ms(), minishell.exit_status);
 }

@@ -22,3 +22,25 @@ void	*ft_garbage_collector(void *ptr, bool clean)
 		return (ptr);
 	}
 }
+
+bool	ft_is_limiter(char *limiter, char *line)
+{
+	while (*line)
+	{
+		if (*limiter == '"' || *limiter == '\'')
+		{
+			limiter++;
+			continue ;
+		}
+		else if (*line == *limiter)
+		{
+			limiter++;
+			line++;
+		}
+		else
+			return (false);
+	}
+	while (*limiter == '"' || *limiter == '\'')
+		limiter++;
+	return (!*limiter);
+}

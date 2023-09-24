@@ -1,6 +1,21 @@
 
 #include "../include/minishell.h"
 
+
+char	*ft_getenv_val(char *key)
+{
+	t_env	*env_lst;
+
+	env_lst =  minishell.envlst;
+	while (env_lst)
+	{
+		if (!ft_strcmp(key, env_lst->key))
+			return env_lst->value;
+		env_lst = env_lst->next;
+	}
+	return (NULL);
+}
+
 char	*ft_extract_key(char *str)
 {
 	size_t	i;

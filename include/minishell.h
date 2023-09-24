@@ -31,7 +31,7 @@ typedef struct s_minishell
 	t_token			*tokens;
 	t_token			*curr_token;
 	t_node			*ast;
-	int				exit_s;
+	int				exit_status;
 	bool			signint_child;
 	t_parse_err		parse_err;
 	int				stdin;
