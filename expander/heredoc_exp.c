@@ -1,11 +1,11 @@
 
-
+#include "../include/minishell.h"
 
 int ft_var_expander(char *line, int i, int fd)
 {
     char    *exp_name;
     char    *exp_val;
-    int     exp_debut;
+    int    exp_debut;
 
     exp_debut = ++i;
     if (line[i] == '?')
@@ -27,7 +27,7 @@ int ft_var_expander(char *line, int i, int fd)
 
 void    ft_heredoc_exp(char *line, int fd)
 {
-    size_t  i;
+    int i;
 
     i = 0;
     while (line[i])
@@ -36,9 +36,9 @@ void    ft_heredoc_exp(char *line, int fd)
             i += ft_var_expander(line, i, fd);
         else
         {
-            i += ft_putchar_fd(line[i], fd);
+            ft_putchar_fd(line[i], fd);
             i++;
         }
     }
-    ft_putstr_fd('\n', fd);
+    ft_putchar_fd('\n', fd);
 }

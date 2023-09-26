@@ -1,7 +1,7 @@
 
 #include "../include/minishell.h"
 
-static void	ft_del(void *ptr)
+void	ft_del(void *ptr)
 {
 	free(ptr);
 	ptr = NULL;

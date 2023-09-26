@@ -1,7 +1,7 @@
 
 #include "../include/minishell.h"
 
-static t_env	*ft_envlst_new(char *key, char *value)
+t_env	*ft_envlst_new(char *key, char *value)
 {
 	t_env	*new;
 

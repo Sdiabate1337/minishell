@@ -35,6 +35,18 @@ void print_io_node(t_io_node *io_node)
     }
 }
 
+void    print_expargs(char **expargs)
+{
+    int i;
+
+    i = 0;
+    while (expargs[i])
+    {
+        printf("arg[%d]: %s \n", i, expargs[i]);
+        i++;
+    }
+}
+
 void print_node(t_node *node)
 {
     if (node)
@@ -48,7 +60,10 @@ void print_node(t_node *node)
             printf("node Type: Unknown\n");
         }
         printf("Node Args: %s\n", node->args);
-        printf("Node Expanded Args: %s\n", node->expanded_args ? node->expanded_args[0] : "(null)");
+        
+        printf("Node expanded Args\n");
+        if (node->expanded_args)
+            print_expargs(node->expanded_args);
         
         // Print the IO nodes associated with this node.
         printf("IO List for this Node:\n");
@@ -115,10 +130,6 @@ void print_tokens(t_token *token_list)
 }
 
 
-
-
-
-
 static void	ft_init_minishell(char **env)
 {
 	ft_memset(&minishell, 0, sizeof(t_minishell));
@@ -149,7 +160,7 @@ int	main(int argc, char **argv, char **env)
 		if (!minishell.tokens)
 			continue ;
 		minishell.ast = ft_parse();
-        print_ast(minishell.ast);
+        
 		/*
             if (minishell.parse_err.type)
 		{
@@ -158,6 +169,7 @@ int	main(int argc, char **argv, char **env)
 		}
         */
 		ft_start_execution();
+        print_ast(minishell.ast);
 	}
 	ft_garbage_collector(NULL, true);
     return (0);

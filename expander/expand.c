@@ -1,6 +1,36 @@
-char    *ft_handle_normal(char *args, size_t *i)
+#include "../include/minishell.h"
+
+char    *ft_clean_empty_quotes(char *args)
 {
-    size_t  start;
+    char    *char_t;
+    int     i;
+    int     j;
+    int     len;
+    char    *clean_args;
+
+    if ((args[0] == '\'' && args[1] == '\'' && !args[2])
+        || (args[0] == '"' && args[1] == '"' && !args[2]))
+        return (args);
+    char_t = ft_calloc(ft_strlen(args) + 1, sizeof(char));
+    i = 0;
+    j = 0;
+    while (args[i])
+    {
+        if ((args[i] == '\'' && args[i + 1] == '\'') 
+            || (args[i] == '"' && args[i + 1] == '"'))
+            i += 2;
+        else
+            char_t[j++] = args[i++];
+    }
+    free(args);
+    len = ft_strlen(char_t) + 1;
+    clean_args = ft_calloc(len, sizeof(char));
+    return (ft_strlcpy(clean_args, char_t, len), free(char_t), clean_args);
+}
+
+char    *ft_handle_normal(char *args, int*i)
+{
+    int start;
 
     start = *i;
     while (args[*i] && args[*i] != '"' && args[*i] != '\''
@@ -11,8 +41,8 @@ char    *ft_handle_normal(char *args, size_t *i)
 
 char    *ft_exp_cmd(char *args)
 {
-    char    exp_res;
-    size_t      i;
+    char    *exp_res;
+    int    i;
 
     exp_res = ft_strdup("");
     i = 0;
@@ -32,20 +62,17 @@ char    *ft_exp_cmd(char *args)
 
 char **ft_expand(char *args)
 {
-    char    **expanded_args;
-    size_t                 i;
+   char    **expanded_args;
 
     args = ft_exp_cmd(args);
     if (!args)
         return (NULL);
-
-    args = ft_clean_emptyargs(args);
+    args = ft_clean_empty_quotes(args);
     if (!args)
         return (NULL);
-    
-    expanded_args = ft_exp_split(args);
+    expanded_args = ft_args_split(args);
     free(args);
     if (!expanded_args)
-        return (NUll);
+        return (NULL);
     return (expanded_args);
 }

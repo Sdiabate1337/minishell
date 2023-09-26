@@ -1,3 +1,4 @@
+#include "../include/minishell.h"
 
 void    ft_heredoc_handler(t_io_node *io, int fd[2])
 {
@@ -5,7 +6,7 @@ void    ft_heredoc_handler(t_io_node *io, int fd[2])
     char *line;
 
     quote = io->value;
-    while (*quote && quote != '"' && *quote != '\'')
+    while (*quote && *quote != '"' && *quote != '\'')
         quote++;
     while (1)
     {
@@ -18,8 +19,8 @@ void    ft_heredoc_handler(t_io_node *io, int fd[2])
             ft_heredoc_exp(line, fd[1]);
         else
         {
-            ft_putstr_fd(line, fd[1];
-            ft_putstr_fd("\n", fd[1]));
+            ft_putstr_fd(line, fd[1]);
+            ft_putstr_fd("\n", fd[1]);
         }
     }
 }
@@ -27,8 +28,8 @@ void    ft_heredoc_handler(t_io_node *io, int fd[2])
 bool ft_childproc_exit(int p[2], int *pid)
 {
     waitpid(*pid, pid, 0);
-    signal(SIGQUIT, ft_sigquit_handler);
-    g_minishell.signint_child = false;
+    //signal(SIGQUIT, ft_sigquit_handler);
+    minishell.signint_child = false;
     close(p[1]);
     if (WIFEXITED(*pid) && WEXITSTATUS(*pid) == SIGINT)
         return (true);
@@ -38,8 +39,8 @@ bool ft_childproc_exit(int p[2], int *pid)
 void    ft_init_leaf_node(t_node *node)
 {
     t_io_node   *io;
-    int         fd[2];
-    int       pid;
+    int        fd[2];
+    int      pid;
 
     if (node->args)
         node->expanded_args = ft_expand(node->args);
@@ -55,7 +56,7 @@ void    ft_init_leaf_node(t_node *node)
                 ft_heredoc_handler(io, fd);
             if (ft_childproc_exit(fd, &pid))
                 return ;
-            io->heredoc = fd[0];
+            io->here_doc = fd[0];
         }
         else
             io->expanded_value = ft_expand(io->value);

@@ -2,7 +2,7 @@
 NAME		:= minishell
 
 LIBFT		:= libft.a
-LIBFT_PATH	:= "lib/libft"
+LIBFT_PATH	:= lib/libft
 
 CC			:= cc
 
@@ -13,7 +13,14 @@ BUILTINS	:=	builtins/env.c \
 
 CLEANING	:=	
 
+EXPANDER	:= expander/exp_tools.c \
+				expander/expand.c \
+				expander/heredoc_exp.c \
+				expander/args_split.c
+
 EXEC		:=	executer/exec_tools.c \
+				executer/exec.c \
+				executer/init_exec_tree.c
 
 PARSER		:=	parser/parser_cleaner.c \
 				parser/parser_err.c \

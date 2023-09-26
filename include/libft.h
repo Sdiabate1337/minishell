@@ -54,6 +54,7 @@ void	ft_free_char3(char ***tofree);
 void	ft_free_char2(char **tofree);
 int	ft_isspace(char c);
 int	ft_strcmp(const char *s1, const char *s2);
+char	*ft_strjoin_free(char *s1, char *s2);
 typedef struct s_list
 {
 	void			*content;

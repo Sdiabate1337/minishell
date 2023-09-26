@@ -1,3 +1,5 @@
+#include "../../include/libft.h"
+
 char	*ft_strjoin_free(char *s1, char *s2)
 {
 	char	*joined;
