@@ -13,6 +13,7 @@ void    fill_word(char const *args, char **exp_args, int *i, int j)
         else
         {
             quote = args[(*i)++];
+            exp_args[j][k++] = quote;
             while (args[*i] != quote)
                 exp_args[j][k++] = args[(*i)++];
             exp_args[j][k++] = args[(*i)++];

@@ -69,7 +69,8 @@ char	*ft_handle_dquote(char *args, int *i)
 {
     char    *res;
 
-	(*i)++;
+    res = ft_strdup("\"");
+    (*i)++;
 	while (args[*i] != '"')
     {
         if (args[*i] == '$')
@@ -77,5 +78,7 @@ char	*ft_handle_dquote(char *args, int *i)
         else
             res = ft_strjoin_free(res, ft_handle_dquote_str(args, i));
     }
+    (*i)++;
+    //printf("je suis la\n");
 	return (ft_strjoin_free(res, ft_strdup("\"")));
 }

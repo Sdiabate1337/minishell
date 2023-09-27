@@ -6,7 +6,7 @@ LIBFT_PATH	:= lib/libft
 
 CC			:= cc
 
-CFLAGS		:= -Wall -Werror -Wextra
+CFLAGS		:= -Wall -Werror -Wextra -g
 
 BUILTINS	:=	builtins/env.c \
 				builtins/env_tools.c \
